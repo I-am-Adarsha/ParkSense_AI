@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: parksense-ai-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements_prod.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
