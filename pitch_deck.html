@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ParkSense AI — Pitch Deck | Flipkart Gridlock Hackathon 2.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0e1a;
+            --bg2: #111827;
+            --card: #1a2035;
+            --border: rgba(255,255,255,0.08);
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --dim: #64748b;
+            --orange: #f59e0b;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --green: #22c55e;
+            --purple: #8b5cf6;
+            --gradient: linear-gradient(135deg, #f59e0b, #ef4444);
+        }
+
+        html { font-size: 16px; scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+
+        /* Slide Container */
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 6rem;
+            scroll-snap-align: start;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -200px; right: -200px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(245,158,11,0.06), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 2rem;
+            right: 3rem;
+            font-size: 0.8rem;
+            color: var(--dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Typography */
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .slide-title.gradient {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide-subtitle {
+            font-size: 1.3rem;
+            color: var(--muted);
+            max-width: 800px;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--orange);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.75rem; }
+        h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+        p { color: var(--muted); line-height: 1.7; max-width: 700px; }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1100px;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: 0.3s;
+        }
+
+        .card:hover { border-color: rgba(245,158,11,0.2); transform: translateY(-3px); }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+        .card p { font-size: 0.9rem; }
+
+        /* Stats Grid */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Flow/Pipeline */
+        .pipeline {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pipeline-step {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.2rem 1.8rem;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .pipeline-step .step-num {
+            font-size: 0.7rem;
+            color: var(--orange);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .pipeline-step .step-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .pipeline-arrow {
+            font-size: 1.5rem;
+            color: var(--dim);
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .tech-badge.orange { background: rgba(245,158,11,0.12); }
+        .tech-badge.blue { background: rgba(59,130,246,0.12); }
+        .tech-badge.green { background: rgba(34,197,94,0.12); }
+        .tech-badge.purple { background: rgba(139,92,246,0.12); }
+
+        /* List */
+        .feature-list {
+            list-style: none;
+            max-width: 700px;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 1rem;
+            color: var(--muted);
+        }
+
+        .feature-list li .check {
+            color: var(--green);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Impact table */
+        .impact-table {
+            width: 100%;
+            max-width: 900px;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .impact-table th {
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--dim);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .impact-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            color: var(--muted);
+        }
+
+        .impact-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .badge.urgent { background: rgba(220,38,38,0.15); color: #f87171; }
+        .badge.high { background: rgba(249,115,22,0.15); color: #fb923c; }
+
+        /* CTA Slide */
+        .cta-grid {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .cta-card .emoji { font-size: 2rem; margin-bottom: 0.75rem; }
+
+        /* Divider */
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 4px;
+            margin: 1rem 0 1.5rem;
+        }
+
+        /* Nav dots */
+        .nav-dots {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--dim);
+            opacity: 0.4;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav-dot:hover, .nav-dot.active {
+            opacity: 1;
+            background: var(--orange);
+            transform: scale(1.3);
+        }
+
+        /* Print */
+        @media print {
+            .slide { page-break-after: always; min-height: auto; padding: 2rem; }
+            .nav-dots { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav Dots -->
+<div class="nav-dots">
+    <div class="nav-dot active" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="nav-dot" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="nav-dot" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="nav-dot" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="nav-dot" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="nav-dot" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="nav-dot" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="nav-dot" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="nav-dot" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})"></div>
+    <div class="nav-dot" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'})"></div>
+</div>
+
+<!-- ========== SLIDE 1: TITLE ========== -->
+<section class="slide" id="s1">
+    <div class="section-label">Flipkart Gridlock Hackathon 2.0 — Round 2</div>
+    <h1 class="slide-title gradient">ParkSense AI</h1>
+    <p class="slide-subtitle">
+        AI-Driven Parking Intelligence for Detecting Illegal Parking Hotspots
+        and Quantifying Their Impact on Traffic Flow
+    </p>
+    <div class="pipeline" style="margin-top:1rem;">
+        <div class="pipeline-step">
+            <div class="step-num">Theme</div>
+            <div class="step-title">Poor Visibility on<br>Parking-Induced Congestion</div>
+        </div>
+    </div>
+    <p style="margin-top:2rem; font-size:1rem; color:var(--dim);">Team: ATAdarsha's Team</p>
+    <span class="slide-number">01 / 10</span>
+</section>
+
+<!-- ========== SLIDE 2: PROBLEM ========== -->
+<section class="slide" id="s2">
+    <div class="section-label">The Problem</div>
+    <h2>Parking Violations Are Choking<br>Bengaluru's Roads</h2>
+    <div class="divider"></div>
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">🚔</div>
+            <h3>Reactive Enforcement</h3>
+            <p>Current enforcement is patrol-based and reactive — officers can't be everywhere at once. Violations go undetected for hours.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🗺️</div>
+            <h3>No Congestion Mapping</h3>
+            <p>There's no heatmap connecting parking violations to their actual traffic impact. Authorities are flying blind.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🎯</div>
+            <h3>Can't Prioritize</h3>
+            <p>With thousands of daily violations, it's impossible to decide which areas need enforcement first without data-driven ranking.</p>
+        </div>
+    </div>
+    <span class="slide-number">02 / 10</span>
+</section>
+
+<!-- ========== SLIDE 3: SOLUTION ========== -->
+<section class="slide" id="s3">
+    <div class="section-label">Our Solution</div>
+    <h2>From Raw Data to Actionable Intelligence</h2>
+    <div class="divider"></div>
+    <p style="text-align:center; margin-bottom:1rem;">ParkSense AI transforms parking violation data into a 4-step intelligence pipeline:</p>
+    <div class="pipeline">
+        <div class="pipeline-step">
+            <div class="step-num">Step 1</div>
+            <div class="step-title">🔍 Detect</div>
+            <p style="font-size:0.8rem; margin-top:0.3rem;">ML-powered hotspot<br>identification</p>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step">
+            <div class="step-num">Step 2</div>
+            <div class="step-title">📊 Quantify</div>
+            <p style="font-size:0.8rem; margin-top:0.3rem;">Congestion impact<br>scoring</p>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step">
+            <div class="step-num">Step 3</div>
+            <div class="step-title">🎯 Prioritize</div>
+            <p style="font-size:0.8rem; margin-top:0.3rem;">Enforcement zone<br>ranking</p>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step">
+            <div class="step-num">Step 4</div>
+            <div class="step-title">⏰ Optimize</div>
+            <p style="font-size:0.8rem; margin-top:0.3rem;">Temporal pattern<br>scheduling</p>
+        </div>
+    </div>
+    <span class="slide-number">03 / 10</span>
+</section>
+
+<!-- ========== SLIDE 4: DATA ========== -->
+<section class="slide" id="s4">
+    <div class="section-label">Dataset</div>
+    <h2>298,000+ Real Violation Records</h2>
+    <div class="divider"></div>
+    <div class="stat-grid">
+        <div class="stat">
+            <div class="stat-value">298K+</div>
+            <div class="stat-label">Total Violations</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">231K+</div>
+            <div class="stat-label">Unique Vehicles</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">82+</div>
+            <div class="stat-label">Police Stations</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">5 mo</div>
+            <div class="stat-label">Time Span</div>
+        </div>
+    </div>
+    <p style="text-align:center; margin-top:2rem;">Data includes: GPS coordinates, violation types, vehicle types,<br>timestamps, police station, junction info, and validation status</p>
+    <span class="slide-number">04 / 10</span>
+</section>
+
+<!-- ========== SLIDE 5: AI MODELS ========== -->
+<section class="slide" id="s5">
+    <div class="section-label">AI / ML Models</div>
+    <h2>Intelligence Under the Hood</h2>
+    <div class="divider"></div>
+    <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+            <div class="card-icon">🧠</div>
+            <h3>DBSCAN Spatial Clustering</h3>
+            <p>Density-based clustering with haversine distance metric identifies geographical hotspots from raw lat/lng coordinates. Found <strong style="color:var(--orange);">145 clusters</strong>.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">📈</div>
+            <h3>Congestion Impact Score</h3>
+            <p>Weighted multi-factor model (0-100) combining: violation density, road type severity, vehicle weight, peak hour concentration, and junction proximity.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🎯</div>
+            <h3>Enforcement Prioritization</h3>
+            <p>Composite algorithm combining congestion score, enforcement gap (areas with low action rates), violation recency, and repeat offender density. <strong style="color:var(--red);">54 Urgent zones</strong> flagged.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">⏰</div>
+            <h3>Temporal Analysis</h3>
+            <p>Time-series decomposition across hourly, daily, weekly, and monthly granularity. Powers optimal enforcement shift scheduling.</p>
+        </div>
+    </div>
+    <span class="slide-number">05 / 10</span>
+</section>
+
+<!-- ========== SLIDE 6: FEATURES ========== -->
+<section class="slide" id="s6">
+    <div class="section-label">Dashboard Features</div>
+    <h2>6 Powerful Analytics Views</h2>
+    <div class="divider"></div>
+    <ul class="feature-list">
+        <li><span class="check">✓</span> <strong>Overview Dashboard</strong> — KPI cards, violation/vehicle charts, mini-map, top enforcement zones</li>
+        <li><span class="check">✓</span> <strong>Violation Heatmap</strong> — 50K severity-weighted data points on an interactive Bengaluru map</li>
+        <li><span class="check">✓</span> <strong>Hotspot Clusters</strong> — 145 AI-detected clusters with impact scoring and clickable popups</li>
+        <li><span class="check">✓</span> <strong>Enforcement Zones</strong> — Prioritized zone rankings with full enforcement table</li>
+        <li><span class="check">✓</span> <strong>Temporal Analysis</strong> — Hourly, daily, monthly trends + Hour×Day heatmap matrix</li>
+        <li><span class="check">✓</span> <strong>Police Stations</strong> — Per-station violation breakdown with 82+ stations mapped</li>
+    </ul>
+    <span class="slide-number">06 / 10</span>
+</section>
+
+<!-- ========== SLIDE 7: TECH STACK ========== -->
+<section class="slide" id="s7">
+    <div class="section-label">Technology</div>
+    <h2>Tech Stack</h2>
+    <div class="divider"></div>
+    <div class="tech-grid">
+        <div class="tech-item">
+            <div class="tech-badge orange">🐍</div>
+            <div>
+                <h3>Python Backend</h3>
+                <p style="font-size:0.85rem;">Flask API • pandas • numpy • scikit-learn</p>
+            </div>
+        </div>
+        <div class="tech-item">
+            <div class="tech-badge blue">🤖</div>
+            <div>
+                <h3>ML Engine</h3>
+                <p style="font-size:0.85rem;">DBSCAN / HDBSCAN • scipy • Custom scoring models</p>
+            </div>
+        </div>
+        <div class="tech-item">
+            <div class="tech-badge green">🗺️</div>
+            <div>
+                <h3>Geospatial</h3>
+                <p style="font-size:0.85rem;">Leaflet.js • Leaflet Heat • CartoDB dark tiles</p>
+            </div>
+        </div>
+        <div class="tech-item">
+            <div class="tech-badge purple">📊</div>
+            <div>
+                <h3>Frontend</h3>
+                <p style="font-size:0.85rem;">Vite • Vanilla JS • Chart.js • Responsive CSS</p>
+            </div>
+        </div>
+    </div>
+    <span class="slide-number">07 / 10</span>
+</section>
+
+<!-- ========== SLIDE 8: ARCHITECTURE ========== -->
+<section class="slide" id="s8">
+    <div class="section-label">Architecture</div>
+    <h2>System Architecture</h2>
+    <div class="divider"></div>
+    <div class="pipeline" style="flex-direction: column; gap: 0.5rem;">
+        <div style="display:flex; align-items:center; gap:1rem;">
+            <div class="pipeline-step" style="border-color: rgba(245,158,11,0.3);">
+                <div class="step-num">Input</div>
+                <div class="step-title">298K CSV Records</div>
+            </div>
+            <div class="pipeline-arrow">→</div>
+            <div class="pipeline-step" style="border-color: rgba(59,130,246,0.3);">
+                <div class="step-num">Processing</div>
+                <div class="step-title">Data Pipeline</div>
+                <p style="font-size:0.75rem; margin-top:0.2rem;">Clean → Features → 44 columns</p>
+            </div>
+            <div class="pipeline-arrow">→</div>
+            <div class="pipeline-step" style="border-color: rgba(139,92,246,0.3);">
+                <div class="step-num">ML Models</div>
+                <div class="step-title">DBSCAN + Scoring</div>
+                <p style="font-size:0.75rem; margin-top:0.2rem;">Clusters → Impact → Priority</p>
+            </div>
+        </div>
+        <div style="font-size:1.5rem; color:var(--dim);">↓</div>
+        <div style="display:flex; align-items:center; gap:1rem;">
+            <div class="pipeline-step" style="border-color: rgba(34,197,94,0.3);">
+                <div class="step-num">Storage</div>
+                <div class="step-title">Precomputed JSON</div>
+                <p style="font-size:0.75rem; margin-top:0.2rem;">8 analytics files</p>
+            </div>
+            <div class="pipeline-arrow">→</div>
+            <div class="pipeline-step" style="border-color: rgba(245,158,11,0.3);">
+                <div class="step-num">API</div>
+                <div class="step-title">Flask REST API</div>
+                <p style="font-size:0.75rem; margin-top:0.2rem;">8 endpoints</p>
+            </div>
+            <div class="pipeline-arrow">→</div>
+            <div class="pipeline-step" style="border-color: rgba(239,68,68,0.3);">
+                <div class="step-num">Frontend</div>
+                <div class="step-title">Interactive Dashboard</div>
+                <p style="font-size:0.75rem; margin-top:0.2rem;">Maps + Charts + Tables</p>
+            </div>
+        </div>
+    </div>
+    <span class="slide-number">08 / 10</span>
+</section>
+
+<!-- ========== SLIDE 9: KEY RESULTS ========== -->
+<section class="slide" id="s9">
+    <div class="section-label">Results</div>
+    <h2>Key Findings</h2>
+    <div class="divider"></div>
+    <table class="impact-table">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+                <th>Insight</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Hotspots Detected</strong></td>
+                <td style="font-family:'JetBrains Mono';color:var(--orange);font-weight:700;">145</td>
+                <td>Automated detection vs. manual patrol</td>
+            </tr>
+            <tr>
+                <td><strong>Urgent Enforcement Zones</strong></td>
+                <td style="font-family:'JetBrains Mono';font-weight:700;"><span class="badge urgent">54 URGENT</span></td>
+                <td>Immediate enforcement attention needed</td>
+            </tr>
+            <tr>
+                <td><strong>High Impact Zones</strong></td>
+                <td style="font-family:'JetBrains Mono';font-weight:700;"><span class="badge high">5 HIGH</span></td>
+                <td>Maximum congestion impact areas</td>
+            </tr>
+            <tr>
+                <td><strong>Peak Violation Hour</strong></td>
+                <td style="font-family:'JetBrains Mono';color:var(--purple);font-weight:700;">05:00–06:00</td>
+                <td>Early morning = highest violation density</td>
+            </tr>
+            <tr>
+                <td><strong>Top Violation Type</strong></td>
+                <td style="font-family:'JetBrains Mono';color:var(--blue);font-weight:700;">Wrong Parking</td>
+                <td>Accounts for majority of all violations</td>
+            </tr>
+            <tr>
+                <td><strong>Dominant Vehicle</strong></td>
+                <td style="font-family:'JetBrains Mono';color:var(--green);font-weight:700;">2-Wheelers</td>
+                <td>Highest offender category by volume</td>
+            </tr>
+        </tbody>
+    </table>
+    <span class="slide-number">09 / 10</span>
+</section>
+
+<!-- ========== SLIDE 10: CLOSING ========== -->
+<section class="slide" id="s10">
+    <div class="section-label">Thank You</div>
+    <h1 class="slide-title gradient">ParkSense AI</h1>
+    <p class="slide-subtitle">
+        Making Bengaluru's roads smarter,<br>one parking violation at a time.
+    </p>
+    <div class="divider" style="margin: 0 auto 2rem;"></div>
+    <div class="cta-grid">
+        <div class="cta-card">
+            <div class="emoji">🔍</div>
+            <h3>Detect</h3>
+            <p style="font-size:0.85rem;">AI-powered<br>hotspot detection</p>
+        </div>
+        <div class="cta-card">
+            <div class="emoji">📊</div>
+            <h3>Quantify</h3>
+            <p style="font-size:0.85rem;">Congestion<br>impact scoring</p>
+        </div>
+        <div class="cta-card">
+            <div class="emoji">🎯</div>
+            <h3>Prioritize</h3>
+            <p style="font-size:0.85rem;">Enforcement<br>zone ranking</p>
+        </div>
+        <div class="cta-card">
+            <div class="emoji">⏰</div>
+            <h3>Optimize</h3>
+            <p style="font-size:0.85rem;">Patrol<br>scheduling</p>
+        </div>
+    </div>
+    <p style="margin-top:2.5rem; text-align:center; color:var(--dim); font-size:0.9rem;">
+        Team: ATAdarsha's Team &nbsp;•&nbsp; Flipkart Gridlock Hackathon 2.0
+    </p>
+    <span class="slide-number">10 / 10</span>
+</section>
+
+<script>
+    // Highlight active nav dot on scroll
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.nav-dot');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const idx = Array.from(slides).indexOf(entry.target);
+                dots.forEach(d => d.classList.remove('active'));
+                if (dots[idx]) dots[idx].classList.add('active');
+            }
+        });
+    }, { threshold: 0.5 });
+    slides.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

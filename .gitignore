@@ -1,0 +1,29 @@
+# Huge datasets
+*.csv
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Node/Vite
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# IDE and system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# App Data log directories
+.system_generated/
+*.log
