@@ -235,7 +235,8 @@ body {
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  z-index: 100;
+  z-index: 1000;
+  position: relative;
   transition: transform var(--transition-slow);
 }
 
@@ -640,7 +641,7 @@ body {
   position: absolute;
   top: 1rem;
   left: 1rem;
-  z-index: 1000;
+  z-index: 500;
   padding: 1rem 1.25rem;
   background: var(--bg-map-controls);
   border-radius: var(--card-radius-sm);
@@ -939,7 +940,7 @@ body {
     min-width: var(--sidebar-width);
     height: 100vh;
     transform: translateX(-100%);
-    z-index: 200;
+    z-index: 1100;
     box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
   }
 
