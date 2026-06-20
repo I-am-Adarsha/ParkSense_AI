@@ -26,6 +26,27 @@ def load_json(filename: str):
 
 # ---- API Endpoints ----
 
+
+@app.route("/")
+def index():
+    """Root endpoint with API info."""
+    return jsonify({
+        "service": "ParkSense AI API",
+        "status": "running",
+        "endpoints": [
+            "/api/stats",
+            "/api/hotspots",
+            "/api/heatmap",
+            "/api/temporal",
+            "/api/stations",
+            "/api/enforcement-zones",
+            "/api/vehicle-analysis",
+            "/api/violation-analysis",
+            "/api/health",
+        ]
+    })
+
+
 @app.route("/api/stats")
 def get_stats():
     """Dashboard summary statistics."""
